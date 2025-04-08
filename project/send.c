@@ -106,9 +106,7 @@ int main(void)
 	  uint8_t *num = (uint8_t*)malloc(sizeof(uint8_t));
 	  num[0] = 83;
 	  while(1){
-		  HAL_UART_Transmit(
-				  &huart1, num, sizeof(num), HAL_MAX_DELAY
-		  );
+		  HAL_UART_Transmit(&huart1, num, sizeof(num), HAL_MAX_DELAY);
 
 	  }
     /* USER CODE BEGIN 3 */

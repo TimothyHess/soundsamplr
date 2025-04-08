@@ -100,15 +100,15 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  uint8_t number;
-	 	  uint8_t specialNumber = 83;
-	 	  HAL_UART_Receive(&huart1, &number, sizeof(uint8_t), HAL_MAX_DELAY);
-	 	  if (number == specialNumber){
-	 		  HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 1);
-	 	  }
-	 	  else{
-	 		 HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 0);
-	 	  }
+    uint8_t number;
+    uint8_t specialNumber = 83;
+    HAL_UART_Receive(&huart1, &number, sizeof(uint8_t), HAL_MAX_DELAY);
+    if (number == specialNumber){
+        HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 1);
+    }
+    else{
+        HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 0);
+    }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
