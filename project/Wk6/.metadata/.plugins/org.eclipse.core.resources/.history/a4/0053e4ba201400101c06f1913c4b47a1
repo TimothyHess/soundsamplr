@@ -98,22 +98,15 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  //Create our two numbers
 	  uint8_t number;
 	  uint8_t specialNumber = 83;
-	  // Read in the number from the UART pin to the number variable
 	  HAL_UART_Receive(&huart1, &number, sizeof(uint8_t), HAL_MAX_DELAY);
-	  // Check if our number matches
 	  if (number == specialNumber){
-		  // If so turn on LED
 		  HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 1);
 	  }
 	  else{
-		  // If not turn it off
 		 HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 0);
 	  }
-
-	  // Funny Python Business
 	  char string[1024];
 	  sprintf(string, "%05u \r\n", number);
 	  HAL_UART_Transmit(&huart2, (uint8_t *)string, strlen(string), HAL_MAX_DELAY);
