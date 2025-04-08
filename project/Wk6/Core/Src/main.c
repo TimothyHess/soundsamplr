@@ -98,6 +98,18 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+	  uint8_t number;
+	  uint8_t specialNumber = 83;
+	  HAL_UART_Receive(&huart1, &number, sizeof(uint8_t), HAL_MAX_DELAY);
+	  if (number == specialNumber){
+		  HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 1);
+	  }
+	  else{
+		 HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 0);
+	  }
+	  char string[1024];
+	  sprintf(string, "%05u \r\n", number);
+	  HAL_UART_Transmit(&huart2, (uint8_t *)string, strlen(string), HAL_MAX_DELAY);
 
     /* USER CODE BEGIN 3 */
   }
