@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -41,6 +42,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart2;
+UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
 
@@ -95,6 +97,9 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
   while (1)
   {
     /* USER CODE END WHILE */
@@ -117,6 +122,9 @@ int main(void)
 	  char string[1024];
 	  sprintf(string, "%05u \r\n", number);
 	  HAL_UART_Transmit(&huart2, (uint8_t *)string, strlen(string), HAL_MAX_DELAY);
+    /* USER CODE END WHILE */
+
+
 
     /* USER CODE BEGIN 3 */
   }
