@@ -18,11 +18,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include <stdlib.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+# include <stdlib.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -41,6 +40,8 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+TIM_HandleTypeDef htim16;
+
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
@@ -53,6 +54,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_TIM16_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -93,6 +95,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_USART1_UART_Init();
+  MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -101,18 +104,40 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  uint8_t number;
+	  	  HAL_TIM_Base_Start(&htim16);
+	  	  uint8_t transmit_number = 100;
+	  	  uint8_t false = 50;
+	  	  uint8_t number ;
 	      uint8_t specialNumber = 83;
 	      while(1){
-	      HAL_UART_Receive(&huart1, &number, sizeof(uint8_t), HAL_MAX_DELAY);
-	      HAL_Delay(10);
-	      HAL_UART_Transmit(&huart2, &number, sizeof(number), HAL_MAX_DELAY);
-	      if (number == specialNumber){
-	          HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 1);
+			  HAL_UART_Receive(&huart1, &number, sizeof(uint8_t), 100);
+//			  HAL_UART_Transmit(&huart2, &number, sizeof(uint8_t), 100);
+//		      HAL_Delay(10);
 
-	          HAL_Delay(250);
-	          number = 0;
-	      }
+			  if (number == specialNumber){
+
+
+				  HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 1);
+//				  __HAL_TIM_SET_COUNTER(&htim16,0);
+//				  while(__HAL_TIM_GET_COUNTER(&htim16)<250000){
+//
+//
+//					  HAL_UART_Transmit(&huart2, &transmit_number, sizeof(number), 100);
+//
+//
+//				  }
+
+				  HAL_Delay(250);
+				  HAL_UART_Transmit(&huart1, &number, sizeof(uint8_t), 100);
+				  HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 0);
+				  number = 0;
+			  }
+			  else{
+			  HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 0);
+			  // Print 2
+//			  HAL_UART_Transmit(&huart2, &false, sizeof(number), 100);
+
+			  }
 
 	      }
 
@@ -181,6 +206,38 @@ void SystemClock_Config(void)
   /** Enable MSI Auto calibration
   */
   HAL_RCCEx_EnableMSIPLLMode();
+}
+
+/**
+  * @brief TIM16 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM16_Init(void)
+{
+
+  /* USER CODE BEGIN TIM16_Init 0 */
+
+  /* USER CODE END TIM16_Init 0 */
+
+  /* USER CODE BEGIN TIM16_Init 1 */
+
+  /* USER CODE END TIM16_Init 1 */
+  htim16.Instance = TIM16;
+  htim16.Init.Prescaler = 31;
+  htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim16.Init.Period = 65535;
+  htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim16.Init.RepetitionCounter = 0;
+  htim16.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim16) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM16_Init 2 */
+
+  /* USER CODE END TIM16_Init 2 */
+
 }
 
 /**
