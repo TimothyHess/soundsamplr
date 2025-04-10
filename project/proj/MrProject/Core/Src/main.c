@@ -117,7 +117,7 @@ int main(void)
 			  if (number == specialNumber){
 
 
-				  HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 1);
+				  HAL_GPIO_WritePin(GREEN_GPIO_Port, GREEN_Pin, 1);
 //				  __HAL_TIM_SET_COUNTER(&htim16,0);
 //				  while(__HAL_TIM_GET_COUNTER(&htim16)<250000){
 //
@@ -129,11 +129,11 @@ int main(void)
 
 				  HAL_Delay(250);
 				  HAL_UART_Transmit(&huart1, &number, sizeof(uint8_t), 100);
-				  HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 0);
+				  HAL_GPIO_WritePin(GREEN_GPIO_Port, GREEN_Pin, 0);
 				  number = 0;
 			  }
 			  else{
-			  HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 0);
+			  HAL_GPIO_WritePin(GREEN_GPIO_Port, GREEN_Pin, 0);
 			  // Print 2
 //			  HAL_UART_Transmit(&huart2, &false, sizeof(number), 100);
 
@@ -331,7 +331,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GREEN_GPIO_Port, GREEN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : LED_PIN_Pin */
   GPIO_InitStruct.Pin = LED_PIN_Pin;
@@ -340,12 +340,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED_PIN_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LD3_Pin */
-  GPIO_InitStruct.Pin = LD3_Pin;
+  /*Configure GPIO pin : GREEN_Pin */
+  GPIO_InitStruct.Pin = GREEN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LD3_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GREEN_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 

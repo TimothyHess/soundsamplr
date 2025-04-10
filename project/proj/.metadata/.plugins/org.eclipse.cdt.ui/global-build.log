@@ -725,3 +725,102 @@ Finished building: default.size.stdout
  
 Finished building: MrProject.list
  
+15:37:53 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-size  MrProject.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13028	     12	   1916	  14956	   3a6c	MrProject.elf
+Finished building: default.size.stdout
+ 
+15:54:14 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32l4xx_hal_msp.d" -MT"Core/Src/stm32l4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32l4xx_it.d" -MT"Core/Src/stm32l4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_it.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:120:53: error: 'GREEN_Port' undeclared (first use in this function); did you mean 'GREEN_Pin'?
+  120 |                                   HAL_GPIO_WritePin(GREEN_Port, GREEN_Pin, 1);
+      |                                                     ^~~~~~~~~~
+      |                                                     GREEN_Pin
+../Core/Src/main.c:120:53: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+15:54:41 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:120:53: error: 'GREEN' undeclared (first use in this function)
+  120 |                                   HAL_GPIO_WritePin(GREEN, GREEN_Pin, 1);
+      |                                                     ^~~~~
+../Core/Src/main.c:120:53: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:132:53: error: 'GREEN_Port' undeclared (first use in this function); did you mean 'GREEN_Pin'?
+  132 |                                   HAL_GPIO_WritePin(GREEN_Port, GREEN_Pin, 0);
+      |                                                     ^~~~~~~~~~
+      |                                                     GREEN_Pin
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+15:55:12 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:132:53: error: 'GREEN_Port' undeclared (first use in this function); did you mean 'GREEN_Pin'?
+  132 |                                   HAL_GPIO_WritePin(GREEN_Port, GREEN_Pin, 0);
+      |                                                     ^~~~~~~~~~
+      |                                                     GREEN_Pin
+../Core/Src/main.c:132:53: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+15:55:28 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13020	     12	   1916	  14948	   3a64	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:55:36 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-size  MrProject.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13020	     12	   1916	  14948	   3a64	MrProject.elf
+Finished building: default.size.stdout
+ 
+15:56:59 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-size  MrProject.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13020	     12	   1916	  14948	   3a64	MrProject.elf
+Finished building: default.size.stdout
+ 
