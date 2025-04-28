@@ -1,0 +1,826 @@
+13:21:17 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:110:48: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+  110 |                   uint8_t *number = (uint8_t *)malloc(sizeof(uint8_t));
+      |                                                ^~~~~~
+../Core/Src/main.c:21:1: note: include '<stdlib.h>' or provide a declaration of 'malloc'
+   20 | #include "main.h"
+  +++ |+#include <stdlib.h>
+   21 | 
+../Core/Src/main.c:110:48: warning: incompatible implicit declaration of built-in function 'malloc' [-Wbuiltin-declaration-mismatch]
+  110 |                   uint8_t *number = (uint8_t *)malloc(sizeof(uint8_t));
+      |                                                ^~~~~~
+../Core/Src/main.c:110:48: note: include '<stdlib.h>' or provide a declaration of 'malloc'
+../Core/Src/main.c:115:50: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  115 |                       HAL_UART_Transmit(&huart2, &number, sizeof(number), HAL_MAX_DELAY);
+      |                                                  ^~~~~~~
+      |                                                  |
+      |                                                  uint8_t ** {aka unsigned char **}
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:450,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1696:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'uint8_t **' {aka 'unsigned char **'}
+ 1696 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13520	     92	   2252	  15864	   3df8	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+13:21:46 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:115:50: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  115 |                       HAL_UART_Transmit(&huart2, &number, sizeof(number), HAL_MAX_DELAY);
+      |                                                  ^~~~~~~
+      |                                                  |
+      |                                                  uint8_t ** {aka unsigned char **}
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:450,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1696:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'uint8_t **' {aka 'unsigned char **'}
+ 1696 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13520	     92	   2252	  15864	   3df8	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+13:22:05 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13520	     92	   2252	  15864	   3df8	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+13:22:14 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-size  MrProject.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13520	     92	   2252	  15864	   3df8	MrProject.elf
+Finished building: default.size.stdout
+ 
+13:23:23 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13496	     92	   2252	  15840	   3de0	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+13:26:32 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:135:55: error: 'false' undeclared (first use in this function)
+  135 |                           HAL_UART_Transmit(&huart2, &false, sizeof(number), HAL_MAX_DELAY);
+      |                                                       ^~~~~
+../Core/Src/main.c:25:1: note: 'false' is defined in header '<stdbool.h>'; did you forget to '#include <stdbool.h>'?
+   24 | # include <stdlib.h>
+  +++ |+#include <stdbool.h>
+   25 | /* USER CODE END Includes */
+../Core/Src/main.c:135:55: note: each undeclared identifier is reported only once for each function it appears in
+  135 |                           HAL_UART_Transmit(&huart2, &false, sizeof(number), HAL_MAX_DELAY);
+      |                                                       ^~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+13:26:46 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13472	     92	   2252	  15816	   3dc8	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+13:28:15 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:113:53: warning: passing argument 2 of 'HAL_UART_Receive' from incompatible pointer type [-Wincompatible-pointer-types]
+  113 |                           HAL_UART_Receive(&huart1, &number, sizeof(uint8_t), HAL_MAX_DELAY);
+      |                                                     ^~~~~~~
+      |                                                     |
+      |                                                     uint8_t ** {aka unsigned char **}
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:450,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:72: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint8_t **' {aka 'unsigned char **'}
+ 1697 | HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                               ~~~~~~~~~^~~~~
+../Core/Src/main.c:115:50: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  115 |                       HAL_UART_Transmit(&huart2, &number, sizeof(number), HAL_MAX_DELAY);
+      |                                                  ^~~~~~~
+      |                                                  |
+      |                                                  uint8_t ** {aka unsigned char **}
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1696:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'uint8_t **' {aka 'unsigned char **'}
+ 1696 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13472	     92	   2252	  15816	   3dc8	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+13:31:39 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:113:53: warning: passing argument 2 of 'HAL_UART_Receive' from incompatible pointer type [-Wincompatible-pointer-types]
+  113 |                           HAL_UART_Receive(&huart1, &number, sizeof(uint8_t), HAL_MAX_DELAY);
+      |                                                     ^~~~~~~
+      |                                                     |
+      |                                                     uint8_t ** {aka unsigned char **}
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:450,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:72: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint8_t **' {aka 'unsigned char **'}
+ 1697 | HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                               ~~~~~~~~~^~~~~
+../Core/Src/main.c:115:50: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  115 |                       HAL_UART_Transmit(&huart2, &number, sizeof(number), HAL_MAX_DELAY);
+      |                                                  ^~~~~~~
+      |                                                  |
+      |                                                  uint8_t ** {aka unsigned char **}
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1696:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'uint8_t **' {aka 'unsigned char **'}
+ 1696 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13508	     92	   2252	  15852	   3dec	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+13:31:56 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:113:53: warning: passing argument 2 of 'HAL_UART_Receive' from incompatible pointer type [-Wincompatible-pointer-types]
+  113 |                           HAL_UART_Receive(&huart1, &number, sizeof(uint8_t), HAL_MAX_DELAY);
+      |                                                     ^~~~~~~
+      |                                                     |
+      |                                                     uint8_t ** {aka unsigned char **}
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:450,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:72: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint8_t **' {aka 'unsigned char **'}
+ 1697 | HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                               ~~~~~~~~~^~~~~
+../Core/Src/main.c:115:50: warning: passing argument 2 of 'HAL_UART_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+  115 |                       HAL_UART_Transmit(&huart2, &number, sizeof(number), HAL_MAX_DELAY);
+      |                                                  ^~~~~~~
+      |                                                  |
+      |                                                  uint8_t ** {aka unsigned char **}
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1696:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'uint8_t **' {aka 'unsigned char **'}
+ 1696 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13520	     92	   2252	  15864	   3df8	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+13:32:39 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:117:31: error: invalid type argument of unary '*' (have 'int')
+  117 |                           if (*number == specialNumber){
+      |                               ^~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+13:32:54 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  12988	     12	   1916	  14916	   3a44	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+14:07:03 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:113:53: warning: passing argument 2 of 'HAL_UART_Receive' makes pointer from integer without a cast [-Wint-conversion]
+  113 |                           HAL_UART_Receive(&huart1, number, sizeof(uint8_t), HAL_MAX_DELAY);
+      |                                                     ^~~~~~
+      |                                                     |
+      |                                                     uint8_t {aka unsigned char}
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:450,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:72: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint8_t' {aka 'unsigned char'}
+ 1697 | HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                               ~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  12992	     12	   1916	  14920	   3a48	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+14:52:11 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:113:53: warning: passing argument 2 of 'HAL_UART_Receive' makes pointer from integer without a cast [-Wint-conversion]
+  113 |                           HAL_UART_Receive(&huart1, number, sizeof(uint8_t), 100);
+      |                                                     ^~~~~~
+      |                                                     |
+      |                                                     uint8_t {aka unsigned char}
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:450,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:1697:72: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint8_t' {aka 'unsigned char'}
+ 1697 | HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                               ~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  12988	     12	   1916	  14916	   3a44	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+14:52:32 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  12984	     12	   1916	  14912	   3a40	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+14:53:49 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  12980	     12	   1916	  14908	   3a3c	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+14:54:36 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13060	     12	   1916	  14988	   3a8c	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+14:55:51 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13064	     12	   1916	  14992	   3a90	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+14:56:45 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13052	     12	   1916	  14980	   3a84	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+14:58:59 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13068	     12	   1916	  14996	   3a94	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:00:53 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13052	     12	   1916	  14980	   3a84	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:01:35 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13052	     12	   1916	  14980	   3a84	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:02:19 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13064	     12	   1916	  14992	   3a90	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:03:42 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13032	     12	   1916	  14960	   3a70	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:04:31 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13036	     12	   1916	  14964	   3a74	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:06:41 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13036	     12	   1916	  14964	   3a74	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:08:12 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13040	     12	   1916	  14968	   3a78	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:15:12 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  12752	     12	   1916	  14680	   3958	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:18:00 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13040	     12	   1916	  14968	   3a78	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:19:41 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13032	     12	   1916	  14960	   3a70	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:20:38 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13028	     12	   1916	  14956	   3a6c	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:22:41 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13032	     12	   1916	  14960	   3a70	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:24:27 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13032	     12	   1916	  14960	   3a70	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:32:43 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13032	     12	   1916	  14960	   3a70	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:33:41 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13028	     12	   1916	  14956	   3a6c	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:34:20 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13028	     12	   1916	  14956	   3a6c	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:37:53 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-size  MrProject.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13028	     12	   1916	  14956	   3a6c	MrProject.elf
+Finished building: default.size.stdout
+ 
+15:54:14 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32l4xx_hal_msp.d" -MT"Core/Src/stm32l4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32l4xx_it.d" -MT"Core/Src/stm32l4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_it.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:120:53: error: 'GREEN_Port' undeclared (first use in this function); did you mean 'GREEN_Pin'?
+  120 |                                   HAL_GPIO_WritePin(GREEN_Port, GREEN_Pin, 1);
+      |                                                     ^~~~~~~~~~
+      |                                                     GREEN_Pin
+../Core/Src/main.c:120:53: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+15:54:41 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:120:53: error: 'GREEN' undeclared (first use in this function)
+  120 |                                   HAL_GPIO_WritePin(GREEN, GREEN_Pin, 1);
+      |                                                     ^~~~~
+../Core/Src/main.c:120:53: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:132:53: error: 'GREEN_Port' undeclared (first use in this function); did you mean 'GREEN_Pin'?
+  132 |                                   HAL_GPIO_WritePin(GREEN_Port, GREEN_Pin, 0);
+      |                                                     ^~~~~~~~~~
+      |                                                     GREEN_Pin
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+15:55:12 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:132:53: error: 'GREEN_Port' undeclared (first use in this function); did you mean 'GREEN_Pin'?
+  132 |                                   HAL_GPIO_WritePin(GREEN_Port, GREEN_Pin, 0);
+      |                                                     ^~~~~~~~~~
+      |                                                     GREEN_Pin
+../Core/Src/main.c:132:53: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+15:55:28 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L432xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:109:27: warning: unused variable 'false' [-Wunused-variable]
+  109 |                   uint8_t false = 50;
+      |                           ^~~~~
+../Core/Src/main.c:108:27: warning: unused variable 'transmit_number' [-Wunused-variable]
+  108 |                   uint8_t transmit_number = 100;
+      |                           ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "MrProject.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Timothy Hess\OneDrive - Monash University\ECE2071\soundsamplr\project\proj\MrProject\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MrProject.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MrProject.elf
+ 
+arm-none-eabi-size  MrProject.elf 
+arm-none-eabi-objdump -h -S MrProject.elf  > "MrProject.list"
+   text	   data	    bss	    dec	    hex	filename
+  13020	     12	   1916	  14948	   3a64	MrProject.elf
+Finished building: default.size.stdout
+ 
+Finished building: MrProject.list
+ 
+15:55:36 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-size  MrProject.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13020	     12	   1916	  14948	   3a64	MrProject.elf
+Finished building: default.size.stdout
+ 
+15:56:59 **** Incremental Build of configuration Debug for project MrProject ****
+make -j8 all 
+arm-none-eabi-size  MrProject.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13020	     12	   1916	  14948	   3a64	MrProject.elf
+Finished building: default.size.stdout
+ 
