@@ -40,6 +40,8 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+TIM_HandleTypeDef htim16;
+
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
@@ -51,6 +53,7 @@ UART_HandleTypeDef huart2;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
+static void MX_TIM16_Init(void);
 static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
@@ -58,6 +61,14 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint8_t mode =0;
+uint8_t somethingFound = 0;
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+
+		somethingFound =0;
+
+	HAL_UART_Receive_IT(&huart2, &mode, 1);
+}
 
 /* USER CODE END 0 */
 
@@ -91,6 +102,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
+  MX_TIM16_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
@@ -98,21 +110,84 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    uint8_t number;
-    uint8_t specialNumber = 83;
-    HAL_UART_Receive(&huart1, &number, sizeof(uint8_t), HAL_MAX_DELAY);
-    if (number == specialNumber){
-        HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 1);
-    }
-    else{
-        HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, 0);
-    }
+
+	  uint32_t timeout;
+	    uint32_t startTime = 0;
+	    uint32_t endTime = 0;
+	    uint8_t distance  = 0;
+	    uint8_t audio;
+	    uint8_t oldAudio;
+	    uint8_t average;
+	    uint8_t record = 1;
+	    uint8_t secret1 = 0;
+	    uint8_t secret2 = 255;
+
+	    // If mode ==1 we are in distance recofing mode
+	    // If mode ==0 we are in manual recordin mode
+	    HAL_TIM_Base_Start(&htim16);
+	    HAL_GPIO_WritePin(PA6_GPIO_Port, PA6_Pin, 0);
+	    HAL_UART_Receive_IT(&huart2, &mode, 1);
+	    while(1) {
+//	    	HAL_Delay(10);
+	    	if (__HAL_TIM_GET_COUNTER(&htim16)>=60000&&mode==1){
+
+	  	  HAL_GPIO_WritePin(PA6_GPIO_Port, PA6_Pin, 1);
+	  	  __HAL_TIM_SET_COUNTER(&htim16, 0);
+	  	  while (__HAL_TIM_GET_COUNTER (&htim16) < 10);
+	    	  HAL_GPIO_WritePin(PA6_GPIO_Port, PA6_Pin, 0);
+
+	  	  timeout = HAL_GetTick();
+	  	  while (!(HAL_GPIO_ReadPin (ECHO_GPIO_Port, ECHO_Pin)) && timeout + 10 >  HAL_GetTick());
+	  	  startTime = __HAL_TIM_GET_COUNTER (&htim16);
+
+	  	  timeout = HAL_GetTick();
+	  	  while ((HAL_GPIO_ReadPin (ECHO_GPIO_Port, ECHO_Pin)) && timeout + 50 > HAL_GetTick());
+	  	  endTime = __HAL_TIM_GET_COUNTER (&htim16);
+
+	  	  distance = (endTime - startTime)/58;
+
+	  //	  HAL_UART_Transmit(&huart2, &distance, sizeof(uint8_t), 100);
+	  //	  HAL_ADC_Start(&hadc1);
+	  //	  HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
+	  	  if (distance<=8){
+	  		  HAL_GPIO_WritePin(GREEN_GPIO_Port, GREEN_Pin, 1);
+	  		  record =1 ;
+	  	  } else if (distance >= 12){
+	  		  HAL_GPIO_WritePin(GREEN_GPIO_Port, GREEN_Pin, 0);
+	  		  record =0;
+
+	  	  }
+	  	  __HAL_TIM_SET_COUNTER(&htim16,0);
+	    	}
+	    	if (record ==1 && mode ==1){
+	    		oldAudio = audio;
+	    		HAL_UART_Receive(&huart1, &audio, sizeof(audio), 100);
+	    		average = (oldAudio + audio) / 2;
+	    		HAL_UART_Transmit(&huart2, &average, sizeof(distance), 100);
+	    		somethingFound = 1;
+	    	}
+//	    	if ((record ==0 && mode ==1)&& somethingFound==1){
+//				HAL_UART_Transmit(&huart2, &secret1, sizeof(distance), 100);
+//				HAL_UART_Transmit(&huart2, &secret2, sizeof(distance), 100);
+//				HAL_UART_Transmit(&huart2, &secret1, sizeof(distance), 100);
+//
+//	    	}
+	    	else if(mode==0){
+	    		oldAudio = audio;
+	    		HAL_UART_Receive(&huart1, &audio, sizeof(audio), 100);
+	    		average = (oldAudio + audio) / 2;
+	    		HAL_UART_Transmit(&huart2, &average, sizeof(distance), 100);
+//	    		HAL_UART_Receive(&huart1, &audio, sizeof(audio), 100);
+//	    		HAL_UART_Transmit(&huart2, &audio, sizeof(distance), 100);
+
+	    	}
+//	    	HAL_UART_Receive_IT(&huart2, &mode, 1);
+	    	}
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  }
+
   /* USER CODE END 3 */
 }
 
@@ -174,6 +249,38 @@ void SystemClock_Config(void)
   /** Enable MSI Auto calibration
   */
   HAL_RCCEx_EnableMSIPLLMode();
+}
+
+/**
+  * @brief TIM16 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM16_Init(void)
+{
+
+  /* USER CODE BEGIN TIM16_Init 0 */
+
+  /* USER CODE END TIM16_Init 0 */
+
+  /* USER CODE BEGIN TIM16_Init 1 */
+
+  /* USER CODE END TIM16_Init 1 */
+  htim16.Instance = TIM16;
+  htim16.Init.Prescaler = 31;
+  htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim16.Init.Period = 65535;
+  htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim16.Init.RepetitionCounter = 0;
+  htim16.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim16) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM16_Init 2 */
+
+  /* USER CODE END TIM16_Init 2 */
+
 }
 
 /**
@@ -264,24 +371,30 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_PIN_GPIO_Port, LED_PIN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(PA6_GPIO_Port, PA6_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GREEN_GPIO_Port, GREEN_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : LED_PIN_Pin */
-  GPIO_InitStruct.Pin = LED_PIN_Pin;
+  /*Configure GPIO pin : ECHO_Pin */
+  GPIO_InitStruct.Pin = ECHO_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(ECHO_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA6_Pin */
+  GPIO_InitStruct.Pin = PA6_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LED_PIN_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(PA6_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LD3_Pin */
-  GPIO_InitStruct.Pin = LD3_Pin;
+  /*Configure GPIO pin : GREEN_Pin */
+  GPIO_InitStruct.Pin = GREEN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LD3_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GREEN_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 
