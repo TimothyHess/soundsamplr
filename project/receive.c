@@ -66,8 +66,16 @@ static void MX_SPI1_Init(void);
 /* USER CODE BEGIN 0 */
 uint8_t mode =0;
 uint8_t somethingFound = 0;
+uint8_t setDistance;
+uint8_t temp;
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-	HAL_UART_Receive_IT(&huart2, &mode, 1);
+	if (temp==0||temp==1){
+		mode = temp;
+	}
+	else {
+		setDistance = temp;
+	}
+	HAL_UART_Receive_IT(&huart2, &temp, 1);
 }
 
 /* USER CODE END 0 */
@@ -118,8 +126,7 @@ int main(void)
 	    uint8_t distance  = 0;
 	    uint16_t audio;
 	    uint8_t downsampledAudio;
-	    uint8_t oldAudio;
-	    uint8_t average;
+
 	    uint8_t record = 1;
 
 
@@ -127,7 +134,7 @@ int main(void)
 	    // If mode ==0 we are in manual recording mode
 	    HAL_TIM_Base_Start(&htim16);
 	    HAL_GPIO_WritePin(PA6_GPIO_Port, PA6_Pin, 0);
-	    HAL_UART_Receive_IT(&huart2, &mode, 1);
+	    HAL_UART_Receive_IT(&huart2, &temp, 1);
 	    while(1) {
 
 //	    	HAL_Delay(10);
@@ -150,10 +157,10 @@ int main(void)
 	  //	  HAL_UART_Transmit(&huart2, &distance, sizeof(uint8_t), 100);
 	  //	  HAL_ADC_Start(&hadc1);
 	  //	  HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
-	  	  if (distance<=8){
+	  	  if (distance<=(setDistance - 3)){
 	  		  HAL_GPIO_WritePin(GREEN_GPIO_Port, GREEN_Pin, 1);
 	  		  record =1 ;
-	  	  } else if (distance >= 12){
+	  	  } else if (distance >= (setDistance + 5)){
 	  		  HAL_GPIO_WritePin(GREEN_GPIO_Port, GREEN_Pin, 0);
 	  		  record =0;
 
@@ -164,10 +171,12 @@ int main(void)
 	    		HAL_SPI_Receive(&hspi1, &audio, sizeof(audio), 100);
 	    		audio = audio >> 2;
 	    		downsampledAudio = (uint8_t) audio;
-	    		if (downsampledAudio >= 80 && downsampledAudio <= 160) {
-					average = (oldAudio + downsampledAudio) / 2;
-					HAL_UART_Transmit(&huart2, &average, sizeof(distance), 100);
-					oldAudio = downsampledAudio;
+	    		if (downsampledAudio >= 50 && downsampledAudio <= 200) {
+//					average = (oldAudio + downsampledAudio) / 2;
+	    			HAL_GPIO_WritePin(TEST_GPIO_Port, TEST_Pin, 1);
+					HAL_UART_Transmit(&huart2, &downsampledAudio, sizeof(distance), 100);
+					HAL_GPIO_WritePin(TEST_GPIO_Port, TEST_Pin, 0);
+//					oldAudio = downsampledAudio;
 	    		}
 	    	}
 //	    	if ((record ==0 && mode ==1)&& somethingFound==1){
@@ -180,10 +189,12 @@ int main(void)
 	    		HAL_SPI_Receive(&hspi1, &audio, sizeof(audio), 100);
 	    		audio = audio >> 2;
 	    		downsampledAudio = (uint8_t) audio;
-	    		if (downsampledAudio >= 80 && downsampledAudio <= 160) {
-					average = (oldAudio + downsampledAudio) / 2;
-					HAL_UART_Transmit(&huart2, &average, sizeof(distance), 100);
-					oldAudio = downsampledAudio;
+	    		if (downsampledAudio >=50 && downsampledAudio <= 200) {
+//					average = (oldAudio + downsampledAudio) / 2;
+	    			HAL_GPIO_WritePin(TEST_GPIO_Port, TEST_Pin, 1);
+					HAL_UART_Transmit(&huart2, &downsampledAudio, sizeof(distance), 100);
+					HAL_GPIO_WritePin(TEST_GPIO_Port, TEST_Pin, 0);
+//					oldAudio = downsampledAudio;
 	    		}
 
 	    	}
@@ -312,7 +323,7 @@ static void MX_TIM16_Init(void)
 
   /* USER CODE END TIM16_Init 1 */
   htim16.Instance = TIM16;
-  htim16.Init.Prescaler = 0;
+  htim16.Init.Prescaler = 31;
   htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim16.Init.Period = 65535;
   htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -344,7 +355,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
+  huart2.Init.BaudRate = 460800;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -409,23 +420,23 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, PA6_Pin|LED_PIN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, TEST_Pin|PA6_Pin|LED_PIN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GREEN_GPIO_Port, GREEN_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : TEST_Pin PA6_Pin LED_PIN_Pin */
+  GPIO_InitStruct.Pin = TEST_Pin|PA6_Pin|LED_PIN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : ECHO_Pin */
   GPIO_InitStruct.Pin = ECHO_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(ECHO_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PA6_Pin LED_PIN_Pin */
-  GPIO_InitStruct.Pin = PA6_Pin|LED_PIN_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PA9 PA10 */
   GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10;
