@@ -66,18 +66,25 @@ static void MX_TIM16_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-uint8_t sampledValue;
+uint16_t sampledValue;
+//uint8_t shifted;
 
-static void SPI1_WriteByte (uint8_t tx_byte) {
+static void SPI1_WriteTwoBytes (uint16_t tx_data) {
 	while (!LL_SPI_IsActiveFlag_TXE(SPI1)) {;}
-	LL_SPI_TransmitData8(SPI1, tx_byte);
+	LL_SPI_TransmitData16(SPI1, tx_data);
 	while (LL_SPI_IsActiveFlag_BSY(SPI1)){;}
 	LL_SPI_ClearFlag_OVR(SPI1);
 }
 
+
+
+
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
     sampledValue = HAL_ADC_GetValue(hadc);
-    SPI1_WriteByte(sampledValue);
+//    sampledValue=sampledValue >> 2;
+//    shifted=(uint8_t)(sampledValue);
+    //shifted = (uint8_t) (sampledValue & 0xFF);
+    SPI1_WriteTwoBytes(sampledValue);
 }
 
 
@@ -217,7 +224,7 @@ static void MX_ADC1_Init(void)
   */
   hadc1.Instance = ADC1;
   hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
-  hadc1.Init.Resolution = ADC_RESOLUTION_8B;
+  hadc1.Init.Resolution = ADC_RESOLUTION_10B;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
   hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
@@ -291,7 +298,7 @@ static void MX_SPI1_Init(void)
   /* SPI1 parameter configuration*/
   SPI_InitStruct.TransferDirection = LL_SPI_FULL_DUPLEX;
   SPI_InitStruct.Mode = LL_SPI_MODE_MASTER;
-  SPI_InitStruct.DataWidth = LL_SPI_DATAWIDTH_8BIT;
+  SPI_InitStruct.DataWidth = LL_SPI_DATAWIDTH_16BIT;
   SPI_InitStruct.ClockPolarity = LL_SPI_POLARITY_LOW;
   SPI_InitStruct.ClockPhase = LL_SPI_PHASE_1EDGE;
   SPI_InitStruct.NSS = LL_SPI_NSS_SOFT;
