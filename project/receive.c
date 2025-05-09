@@ -112,7 +112,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-	  uint32_t timeout;
+	  	uint32_t timeout;
 	    uint32_t startTime = 0;
 	    uint32_t endTime = 0;
 	    uint8_t distance  = 0;
@@ -160,11 +160,12 @@ int main(void)
 	  	  __HAL_TIM_SET_COUNTER(&htim16,0);
 	    	}
 	    	if (record ==1 && mode ==1){
-	    		oldAudio = audio;
 	    		HAL_SPI_Receive(&hspi1, &audio, sizeof(audio), 100);
-	    		average = (oldAudio + audio) / 2;
-	    		HAL_UART_Transmit(&huart2, &average, sizeof(distance), 100);
-	    		somethingFound = 1;
+	    		if (audio >= 80 && audio <= 160) {
+	    			oldAudio = audio;
+					average = (oldAudio + audio) / 2;
+					HAL_UART_Transmit(&huart2, &average, sizeof(distance), 100);
+	    		}
 	    	}
 //	    	if ((record ==0 && mode ==1)&& somethingFound==1){
 //				HAL_UART_Transmit(&huart2, &secret1, sizeof(distance), 100);
@@ -173,12 +174,12 @@ int main(void)
 //
 //	    	}
 	    	else if(mode==0){
-	    		oldAudio = audio;
 	    		HAL_SPI_Receive(&hspi1, &audio, sizeof(audio), 100);
-	    		average = (oldAudio + audio) / 2;
-	    		HAL_UART_Transmit(&huart2, &average, sizeof(distance), 100);
-//	    		HAL_UART_Receive(&huart1, &audio, sizeof(audio), 100);
-//	    		HAL_UART_Transmit(&huart2, &audio, sizeof(distance), 100);
+	    		if (audio >= 80 && audio <= 160) {
+	    			oldAudio = audio;
+					average = (oldAudio + audio) / 2;
+					HAL_UART_Transmit(&huart2, &average, sizeof(distance), 100);
+	    		}
 
 	    	}
 //	    	HAL_UART_Receive_IT(&huart2, &mode, 1);
