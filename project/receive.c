@@ -116,7 +116,8 @@ int main(void)
 	    uint32_t startTime = 0;
 	    uint32_t endTime = 0;
 	    uint8_t distance  = 0;
-	    uint8_t audio;
+	    uint16_t audio;
+	    uint8_t downsampledAudio;
 	    uint8_t oldAudio;
 	    uint8_t average;
 	    uint8_t record = 1;
@@ -161,10 +162,12 @@ int main(void)
 	    	}
 	    	if (record ==1 && mode ==1){
 	    		HAL_SPI_Receive(&hspi1, &audio, sizeof(audio), 100);
-	    		if (audio >= 80 && audio <= 160) {
-	    			oldAudio = audio;
-					average = (oldAudio + audio) / 2;
+	    		audio = audio >> 2;
+	    		downsampledAudio = (uint8_t) audio;
+	    		if (downsampledAudio >= 80 && downsampledAudio <= 160) {
+					average = (oldAudio + downsampledAudio) / 2;
 					HAL_UART_Transmit(&huart2, &average, sizeof(distance), 100);
+					oldAudio = downsampledAudio;
 	    		}
 	    	}
 //	    	if ((record ==0 && mode ==1)&& somethingFound==1){
@@ -175,10 +178,12 @@ int main(void)
 //	    	}
 	    	else if(mode==0){
 	    		HAL_SPI_Receive(&hspi1, &audio, sizeof(audio), 100);
-	    		if (audio >= 80 && audio <= 160) {
-	    			oldAudio = audio;
-					average = (oldAudio + audio) / 2;
+	    		audio = audio >> 2;
+	    		downsampledAudio = (uint8_t) audio;
+	    		if (downsampledAudio >= 80 && downsampledAudio <= 160) {
+					average = (oldAudio + downsampledAudio) / 2;
 					HAL_UART_Transmit(&huart2, &average, sizeof(distance), 100);
+					oldAudio = downsampledAudio;
 	    		}
 
 	    	}
@@ -271,7 +276,7 @@ static void MX_SPI1_Init(void)
   hspi1.Instance = SPI1;
   hspi1.Init.Mode = SPI_MODE_SLAVE;
   hspi1.Init.Direction = SPI_DIRECTION_2LINES_RXONLY;
-  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+  hspi1.Init.DataSize = SPI_DATASIZE_16BIT;
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
@@ -307,7 +312,7 @@ static void MX_TIM16_Init(void)
 
   /* USER CODE END TIM16_Init 1 */
   htim16.Instance = TIM16;
-  htim16.Init.Prescaler = 31;
+  htim16.Init.Prescaler = 0;
   htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim16.Init.Period = 65535;
   htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
