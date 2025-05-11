@@ -1,15 +1,17 @@
 import wave
 import numpy as np
 import serial
+import serial.serialutil
 import serial.tools.list_ports
 import csv
 from matplotlib import pyplot
 import os
+# from game import game_loop
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 class serialAudio:
-    def __init__(self,comPort="COM3",buad=115200,sampleRate=10000):
+    def __init__(self,comPort="COM3",buad=460800,sampleRate=22000):
         print("Connecting to STM...")
         devices = serial.tools.list_ports.comports()
         for device in devices:
@@ -20,14 +22,13 @@ class serialAudio:
         self.ser.timeout = 0.1
         self.data_list = []
         self.last3 = [0,255,0]
-        self.sampleRate = 10000
+        self.sampleRate = 22000
     
     def receive_data(self,time):
         for i in range(self.sampleRate * time):
             sample = self.ser.read()
 
             self.data_list.append(sample[0])
-        print(self.data_list)
     
     def receive_data_unbounded(self):
         while(1):
@@ -67,18 +68,23 @@ class serialAudio:
 
     def generate_plot(self):
         time  = np.arange(0,len(self.data_list)/self.sampleRate,1/self.sampleRate)
-
+        pyplot.clf
+        
         pyplot.plot(time,self.data_list)
+        pyplot.xlabel("Time (s)")
+        pyplot.ylabel("Amplitude")
         pyplot.savefig("waveform.png",dpi=100)
 
 class serialAudioController(serialAudio):
-    def __init__(self, comPort="COM3", buad=115200, sampleRate=10000):
+    def __init__(self, comPort="COM3", buad=460800, sampleRate=22000):
         super().__init__(comPort, buad, sampleRate)
 
     def main_menu(self):
         while(1):
             clear_screen()
             print("1. Manual Recording mode\n2. Distance measureing mode\n3. Generate outputs")
+            print(self.ser.baudrate)
+            print(self.sampleRate)
             userinput = int(input("Enter option: "))
             if userinput==1:
                 self.manual()
@@ -90,6 +96,9 @@ class serialAudioController(serialAudio):
                 print(self.data_list)
             elif userinput == 5:
                 self.change()
+            elif userinput == 6:
+                # game_loop()
+                pass
 
 
     def change(self):
@@ -107,6 +116,9 @@ class serialAudioController(serialAudio):
     
     def distance(self):
         self.ser.write(bytes.fromhex("01"))
+        dist = (input("Enter distance for ultrasonic (Not zero or one): "))
+        
+        self.ser.write(bytes.fromhex(dist))
         print("Entering distance based measurement mode\nPress Crtl+C to exit")
         try:
             self.receive_data_unbounded()
@@ -126,5 +138,20 @@ class serialAudioController(serialAudio):
 
 
 if __name__=="__main__":
-    interface = serialAudioController()
-    interface.main_menu()
+    try:
+
+        interface = serialAudioController()
+        interface.main_menu()
+    except serial.serialutil.SerialException:
+        print("Unable to connect to STM")
+
+    except ValueError:
+        print("There was a problem with a value you entered")
+    except KeyboardInterrupt:
+        print("\nExiting...")
+        
+        
+
+
+
+    
